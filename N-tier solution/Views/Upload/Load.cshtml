@@ -1,0 +1,46 @@
+﻿@model N_tier_solution.Models.FileUpload
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>File upload</h2>
+<div class="col-md-push-2 col-md-12">
+    <section id="loginForm">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                @Html.Label("File:", new { @class = "col-md-1 control-label" })
+                <div class="col-md-11">
+                    <input type="file" name="files" id="files" multiple />
+                    @Html.ValidationMessage("file", "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group form-group-sm">
+                <div class="col-md-push-2 col-md-10">
+                    <input type="submit" value="upload" id="btnload" class="btn btn-default btn-sm" />
+                </div>
+            </div>
+            <div class="col-md-push-2 col-md-10">
+               <div id="feedback"></div> 
+            </div>
+
+        }
+    </section>
+</div>
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery.signalR-2.3.0.min.js"></script>
+    <script src="~/signalr/js/"></script>
+    <script src="~/Scripts/SignalR.js"></script>
+
+}
+      

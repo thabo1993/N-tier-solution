@@ -1,0 +1,52 @@
+﻿@using N_tier_solution.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+
+<div class="container" style="background-color:#eee;width:40%;margin-top:100px">
+    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post,
+        new { @class = "form-horizontal" }))
+    {
+
+        <div class="container-image">
+            <img src="~/Images/login.png" alt="Login avatar" class="login-image" />
+        </div>
+
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group input-group input-group-sm">
+            @Html.LabelFor(x => x.Email, new { @class = "control-label col-md-4" })
+            @Html.TextBoxFor(x => x.Email, new { @class = "form-control col-md-12", placeholder = "Enter Username" })
+            <span class="input-group-addon glyphicon glyphicon-user"></span>
+            @Html.ValidationMessageFor(x => x.Password)
+        </div>
+        <div class="form-group input-group input-group-sm">
+            @Html.LabelFor(x => x.Password, new { @class = "control-label col-md-4" })
+            @Html.PasswordFor(x => x.Password, new { @class = "form-control col-offset-2 col-md-12", placeholder = "Enter Password" })
+            <span class="input-group-addon glyphicon glyphicon-lock" id="sizing-addon3"></span>
+            @Html.ValidationMessageFor(x => x.Password)
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(x => x.RememberMe)
+                    @Html.LabelFor(x => x.RememberMe)
+                    @Html.ValidationMessageFor(x => x.RememberMe)
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Log in" class="btn btn-success" />
+            </div>
+        </div>
+        <p>
+            @Html.ActionLink("Register as a new user", "Register")
+        </p>
+    }
+</div>
+
